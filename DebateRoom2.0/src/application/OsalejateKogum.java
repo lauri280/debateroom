@@ -9,6 +9,7 @@ public class OsalejateKogum {
 
 	private ArrayList<Osaleja> osalejad = new ArrayList<>();
 	private ArrayList<Osaleja> kohtunikud = new ArrayList<>();
+	private ArrayList<ArrayList<Osaleja>> tiimid = new ArrayList<ArrayList<Osaleja>>();
 	
 	// --- Meetodid ---
 	public void lisaOsaleja(Osaleja osaleja) {
