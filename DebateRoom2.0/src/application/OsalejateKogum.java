@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 public class OsalejateKogum {
 
 	private ArrayList<Osaleja> osalejad = new ArrayList<>();
+	private ArrayList<Osaleja> kohtunikud = new ArrayList<>();
 	
 	// --- Meetodid ---
 	public void lisaOsaleja(Osaleja osaleja) {
