@@ -16,6 +16,58 @@ public class OsalejateKogum {
 		osalejad.add(osaleja);
 	}
 	
+	public void lisaKohtunik(Osaleja kohtunik) {
+		kohtunikud.add(kohtunik);
+		osalejad.remove(kohtunik);
+	}
+	
+	public void lisaTiim(Osaleja liigeA, Osaleja liigeB) { // kaheliikmelise tiimi lisamiseks
+		if (tiimid.size() < 4) {
+			ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();
+			
+			lisatavadOsalejad.add(liigeA);
+			lisatavadOsalejad.add(liigeB);
+			
+			osalejad.remove(liigeA);
+			osalejad.remove(liigeB);
+			
+			tiimid.add(lisatavadOsalejad);
+		} else {
+			System.out.println("Neli tiimi on juba kirjas"); // hiljem teen siia midagi muud
+		}
+		
+	}
+	
+	public void lisaTiim(Osaleja liigeA) { // Iron man tiimi lisamiseks
+		ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();
+		
+		lisatavadOsalejad.add(liigeA);
+		lisatavadOsalejad.add(new Osaleja("-", false));
+		
+		osalejad.remove(liigeA);
+		
+		tiimid.add(lisatavadOsalejad);
+	}
+	
+	public void eemaldaKohtunik(Osaleja kohtunik) {
+		for (Osaleja elem : kohtunikud) {
+			if (elem.getNimi().equals(kohtunik.getNimi())) {
+				osalejad.add(elem);
+				kohtunikud.remove(elem);
+				break;
+			}
+		}
+	}
+	
+	public void eemaldaTiim(ArrayList<Osaleja> tiim) {
+		for (ArrayList<Osaleja> elem : tiimid) {
+			if (elem.get(0).getNimi().equals(tiim.get(0).getNimi()) &&
+					elem.get(1).getNimi().equals(elem.get(1).getNimi())) {
+				
+			}
+		}
+	}
+	
 	public void eemaldaOsaleja(Osaleja osaleja) {
 		for (Osaleja elem : osalejad) {
 			if (elem.getNimi().equals(osaleja.getNimi())) {
