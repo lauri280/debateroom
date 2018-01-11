@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -34,6 +35,7 @@ public class Main extends Application {
 		ListView<String> osalejateList = new ListView<>();
 		root.add(osalejateList, 2, 1);
 		GridPane.setRowSpan(osalejateList, 15);
+		osalejateList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		ListView<String> tiimideList = new ListView<>();
 		root.add(tiimideList, 4, 1);
@@ -133,10 +135,32 @@ public class Main extends Application {
 		Button buttonLisaTiim = new Button("Määra tiimi");
 		root.add(buttonLisaTiim, 2, 17);
 		buttonLisaTiim.setPrefWidth(130);
+		buttonLisaTiim.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				if ((osalejateList.getSelectionModel().getSelectedItems().size() > 0) && 
+						osalejateList.getSelectionModel().getSelectedItems().size() < 3) {
+					osalejad.lisaTiim(osalejateList.getSelectionModel().getSelectedItems());
+					osalejateList.setItems(osalejad.tagastaObservList());
+					tiimideList.setItems(osalejad.tagastaObservTiimideList());
+				}
+			}
+		}); 
 		
 		Button buttonLisaKohtunik = new Button("Määra kohtunikuks");
 		root.add(buttonLisaKohtunik, 2, 18);
 		buttonLisaKohtunik.setPrefWidth(130);
+		buttonLisaKohtunik.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				if (!(osalejateList.getSelectionModel().getSelectedItem() == null)) {
+					osalejad.lisaKohtunik(osalejad.tagastaNimegaOsaleja
+							(osalejateList.getSelectionModel().getSelectedItem()));
+					osalejateList.setItems(osalejad.tagastaObservList());
+					kohtunikeList.setItems(osalejad.tagastaObservKohtunikeList());
+				}
+			}
+		});
 		
 		Button buttonPositsioonid = new Button("Määra positsioonid");
 		root.add(buttonPositsioonid, 2, 19);

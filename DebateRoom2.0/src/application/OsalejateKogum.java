@@ -38,15 +38,39 @@ public class OsalejateKogum {
 		
 	}
 	
-	public void lisaTiim(Osaleja liigeA) { // Iron man tiimi lisamiseks
-		ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();
+	public void lisaTiim(ObservableList<String> liikmed) {
+		if (tiimid.size() < 4) {
+			ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();
+			
+			lisatavadOsalejad.add(this.tagastaNimegaOsaleja(liikmed.get(0)));
+			osalejad.remove(lisatavadOsalejad.get(0));
+			if (liikmed.size() == 2) {
+				lisatavadOsalejad.add(this.tagastaNimegaOsaleja(liikmed.get(1)));
+				osalejad.remove(lisatavadOsalejad.get(1));
+			} else if (liikmed.size() == 1) {
+				lisatavadOsalejad.add(new Osaleja("-", false));
+			}
+			
+			tiimid.add(lisatavadOsalejad);
+		} else {
+			System.out.println("Neli tiimi on juba kirjas"); // hiljem teen siia midagi muud
+		}
+	}
+	
+	public void lisaTiim(Osaleja liigeA) { // Iron man tiimi lisamiseks (pole vist vaja seda)
+		if (tiimid.size() < 4) {
+			ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();
+			
+			lisatavadOsalejad.add(liigeA);
+			lisatavadOsalejad.add(new Osaleja("-", false));
+			
+			osalejad.remove(liigeA);
+			
+			tiimid.add(lisatavadOsalejad);
+		} else {
+			System.out.println("Neli tiimi on juba kirjas"); // hiljem teen siia midagi muud
+		}
 		
-		lisatavadOsalejad.add(liigeA);
-		lisatavadOsalejad.add(new Osaleja("-", false));
-		
-		osalejad.remove(liigeA);
-		
-		tiimid.add(lisatavadOsalejad);
 	}
 	
 	public void eemaldaKohtunik(Osaleja kohtunik) {
@@ -105,10 +129,32 @@ public class OsalejateKogum {
 		return true;
 	}
 	
-	public ObservableList<String> tagastaObservList() {
+	public ObservableList<String> tagastaObservList() { // tagastab kõigi liikmete obsListi
 		ObservableList<String> nimed = FXCollections.observableArrayList();
 		for (Osaleja elem : osalejad) {
 			nimed.add(elem.getNimi());
+		}
+		
+		return nimed;
+	}
+	
+	public ObservableList<String> tagastaObservKohtunikeList() {
+		ObservableList<String> nimed = FXCollections.observableArrayList();
+		for (Osaleja elem : kohtunikud) {
+			nimed.add(elem.getNimi());
+		}
+		
+		return nimed;
+	}
+	
+	public ObservableList<String> tagastaObservTiimideList() {
+		ObservableList<String> nimed = FXCollections.observableArrayList();
+		for (ArrayList<Osaleja> elem : tiimid) {
+			if (elem.get(1).getNimi().equals("-")) {
+				nimed.add(elem.get(0).getNimi());
+			} else {
+				nimed.add(elem.get(0).getNimi() + " + " + elem.get(1).getNimi());
+			}
 		}
 		
 		return nimed;
