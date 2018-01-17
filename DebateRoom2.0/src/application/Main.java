@@ -182,6 +182,23 @@ public class Main extends Application {
 		
 		Button buttonEemaldaTK = new Button("Eemalda tiim/kohtunik");
 		root.add(buttonEemaldaTK, 4, 11);
+		buttonEemaldaTK.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				if ((kohtunikeList.getSelectionModel().getSelectedItem() == null) &&
+						(tiimideList.getSelectionModel().getSelectedItem() != null)) {
+					osalejad.eemaldaTiim(tiimideList.getSelectionModel().getSelectedItem());
+					osalejateList.setItems(osalejad.tagastaObservList());
+					tiimideList.setItems(osalejad.tagastaObservTiimideList());
+					
+				} else if ((kohtunikeList.getSelectionModel().getSelectedItem() != null) &&
+						(tiimideList.getSelectionModel().getSelectedItem() == null)) {
+					osalejad.eemaldaKohtunik(kohtunikeList.getSelectionModel().getSelectedItem());
+					osalejateList.setItems(osalejad.tagastaObservList());
+					kohtunikeList.setItems(osalejad.tagastaObservKohtunikeList());
+				}
+			}
+		});
 		
 		Separator eraldaja3 = new Separator();
 		root.add(eraldaja3, 4, 12);

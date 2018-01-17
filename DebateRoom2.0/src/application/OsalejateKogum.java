@@ -73,7 +73,7 @@ public class OsalejateKogum {
 		
 	}
 	
-	public void eemaldaKohtunik(Osaleja kohtunik) {
+	public void eemaldaKohtunik(Osaleja kohtunik) { // Osaleja isendi kaudu
 		for (Osaleja elem : kohtunikud) {
 			if (elem.getNimi().equals(kohtunik.getNimi())) {
 				osalejad.add(elem);
@@ -83,11 +83,43 @@ public class OsalejateKogum {
 		}
 	}
 	
-	public void eemaldaTiim(ArrayList<Osaleja> tiim) {
+	public void eemaldaKohtunik(String kohtunik) { // nime kaudu
+		for (Osaleja elem : kohtunikud) {
+			if (elem.getNimi().equals(kohtunik)) {
+				osalejad.add(elem);
+				kohtunikud.remove(elem);
+				break;
+			}
+		}
+	}
+	
+	/*
+	public void eemaldaTiim(ArrayList<Osaleja> tiim) { // wtf.. poolik meetod??
 		for (ArrayList<Osaleja> elem : tiimid) {
 			if (elem.get(0).getNimi().equals(tiim.get(0).getNimi()) &&
 					elem.get(1).getNimi().equals(elem.get(1).getNimi())) {
-				
+			}
+		}
+	}*/
+	
+	public void eemaldaTiim(String tiim) {
+		if (tiim.contains(" + ")) {
+			for (ArrayList<Osaleja> elem : tiimid) {
+				if (tiim.equals(this.tagastaTiimiNimed(elem))) {
+					osalejad.add(elem.get(0));
+					osalejad.add(elem.get(1));
+					tiimid.remove(elem);
+					break;
+				}
+			}
+
+		} else {
+			for (ArrayList<Osaleja> elem : tiimid) {
+				if (elem.get(0).getNimi().equals(tiim)) {
+					osalejad.add(elem.get(0));
+					tiimid.remove(elem);
+					break;
+				}
 			}
 		}
 	}
@@ -158,6 +190,10 @@ public class OsalejateKogum {
 		}
 		
 		return nimed;
+	}
+	
+	private String tagastaTiimiNimed(ArrayList<Osaleja> liikmed) {
+		return liikmed.get(0).getNimi() + " + " + liikmed.get(1).getNimi();
 	}
 	
 	public Osaleja tagastaNimegaOsaleja(String nimi) {
