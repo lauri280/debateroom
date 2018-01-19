@@ -34,4 +34,12 @@ public class MuudMeetodid {
 		
 		return tulem;
 	}
+	
+	public static boolean onIronmanTiim(ArrayList<Osaleja> tiim) {
+		if (tiim.get(1).getNimi().equals("-")) {
+			return true;
+		}
+		
+		return false;
+	}
 }

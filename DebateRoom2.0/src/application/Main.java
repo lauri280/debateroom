@@ -98,8 +98,7 @@ public class Main extends Application {
 		buttonTest.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
-				//osalejad.v2ljastaOsalejad();
-				System.out.println(" ");
+				System.out.println(osalejad.tagastaKoguLiikmeteArv());
 			}
 		});
 		

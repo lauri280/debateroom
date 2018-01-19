@@ -229,4 +229,24 @@ public class OsalejateKogum {
 		
 		return tulem;
 	}
+	
+	public int tagastaKoguLiikmeteArv() {
+		int tulem = 0;
+		
+		tulem += osalejad.size();
+		tulem += kohtunikud.size();
+		
+		for (ArrayList<Osaleja> elem : tiimid) {
+			if (MuudMeetodid.onIronmanTiim(elem)) {
+				tulem++;
+			} else {
+				tulem += 2;
+			}
+		}
+		return tulem;
+	}
+	/*
+	public boolean saabTehaT2isRuumi() { // see meetod peaks kontrollima, kas antud osalejatega saab ruumi
+		
+	}*/
 }
