@@ -280,4 +280,27 @@ public class Randomiseerija {
 		 return null;
 	 }
 	 
+	 public Ruum moodustaEelistustegaRuum(OsalejateKogum osalejad) {
+		 Ruum ruum = new Ruum();
+		 ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
+		 ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
+		 ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
+		 
+		 // kui tiime < 4 ja inimesi piisvalt siis loon tiimid
+		 // kui loon full tiimid ja kohtunikuks ei ole kedagi, siis IM tiimid
+		 // kui siis ka ei saa kohtunikuks kedagi, siis error 
+		 
+		 Collections.shuffle(tiimideKogum);
+		 while (this.onIronManTiim(tiimideKogum.get(0))) {
+			 Collections.shuffle(tiimideKogum);
+		 }
+		 
+		 ruum.setTiimOG(tiimideKogum.get(0));
+		 ruum.setTiimOO(tiimideKogum.get(1));
+		 ruum.setTiimCG(tiimideKogum.get(2));
+		 ruum.setTiimCO(tiimideKogum.get(3));
+		 
+		 return ruum;
+	 }
+	 
 }

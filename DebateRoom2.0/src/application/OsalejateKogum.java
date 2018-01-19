@@ -192,7 +192,7 @@ public class OsalejateKogum {
 		return nimed;
 	}
 	
-	private String tagastaTiimiNimed(ArrayList<Osaleja> liikmed) {
+	private String tagastaTiimiNimed(ArrayList<Osaleja> liikmed) { // tagastab tiimis olevate liikmete nimed
 		return liikmed.get(0).getNimi() + " + " + liikmed.get(1).getNimi();
 	}
 	
@@ -208,6 +208,36 @@ public class OsalejateKogum {
 
 	public ArrayList<Osaleja> getOsalejad() {
 		return osalejad;
+	}
+	
+	public ArrayList<Osaleja> getOsalejadCopy() {
+		ArrayList<Osaleja> tulem = new ArrayList<>();
+		
+		for (Osaleja elem : osalejad) {
+			tulem.add(elem);
+		}
+		
+		return tulem;
+	}
+	
+	public ArrayList<Osaleja> getKohtunikudCopy() {
+		ArrayList<Osaleja> tulem = new ArrayList<>();
+		
+		for (Osaleja elem : kohtunikud) {
+			tulem.add(elem);
+		}
+		
+		return tulem;
+	}
+	
+	public ArrayList<ArrayList<Osaleja>> getTiimidCopy() {
+		ArrayList<ArrayList<Osaleja>> tulem = new ArrayList<ArrayList<Osaleja>>();
+		
+		for (ArrayList<Osaleja> elem : tiimid) {
+			tulem.add(elem);
+		}
+		
+		return tulem;
 	}
 	
 	public int getAlgajateArv() {
@@ -245,8 +275,34 @@ public class OsalejateKogum {
 		}
 		return tulem;
 	}
+	
+	public int tagastaIMTiimideArv() { // tagastab Iron Man tiimide arvu tiimide listist
+		int tulem = 0;
+		
+		for (ArrayList<Osaleja> elem : tiimid) {
+			if (MuudMeetodid.onIronmanTiim(elem)) {
+				tulem++;
+			}
+		}
+		
+		return tulem;
+	}
+	
+	public int tagastaTavaTiimideArv() {
+		return tiimid.size() - this.tagastaIMTiimideArv();
+	}
+	
+	public int tagastaTiimidesOlevateInArv() {
+		int tulem = 0;
+		
+		tulem += this.tagastaTavaTiimideArv() * 2;
+		tulem += this.tagastaIMTiimideArv();
+		
+		return tulem;
+	}
 	/*
 	public boolean saabTehaT2isRuumi() { // see meetod peaks kontrollima, kas antud osalejatega saab ruumi
 		
 	}*/
+	
 }
