@@ -93,15 +93,6 @@ public class OsalejateKogum {
 		}
 	}
 	
-	/*
-	public void eemaldaTiim(ArrayList<Osaleja> tiim) { // wtf.. poolik meetod??
-		for (ArrayList<Osaleja> elem : tiimid) {
-			if (elem.get(0).getNimi().equals(tiim.get(0).getNimi()) &&
-					elem.get(1).getNimi().equals(elem.get(1).getNimi())) {
-			}
-		}
-	}*/
-	
 	public void eemaldaTiim(String tiim) {
 		if (tiim.contains(" + ")) {
 			for (ArrayList<Osaleja> elem : tiimid) {
@@ -302,7 +293,16 @@ public class OsalejateKogum {
 	}
 	/*
 	public boolean saabTehaT2isRuumi() { // see meetod peaks kontrollima, kas antud osalejatega saab ruumi
-		
+		// if 9+ in
+		 * if 8 in - peab olema 1 IM tiim ja 1 kohtunik
+		 * if 7 in - peab olema 2 IM tiimi ja 1 kohtunik
+		 * 
+	}
+	
+	public boolean saabTehaPoolikuRuumi() {
+		// if 6 in
+		 * if 5 in
+		 * if 4 in
 	}*/
 	
 }
