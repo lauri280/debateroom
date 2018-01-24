@@ -300,6 +300,14 @@ public class Randomiseerija {
 		 ruum.setTiimCG(tiimideKogum.get(2));
 		 ruum.setTiimCO(tiimideKogum.get(3));
 		 
+		 for (Osaleja elem : ajutineOsalejad) {
+			 ruum.lisaKohLiige(elem);
+		 }
+		 
+		 for (Osaleja elem : ajutineKohtunikud) {
+			 ruum.lisaKohLiige(elem);
+		 }
+		 
 		 return ruum;
 	 }
 	 

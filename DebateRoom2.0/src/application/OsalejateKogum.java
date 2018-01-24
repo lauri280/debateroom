@@ -291,18 +291,36 @@ public class OsalejateKogum {
 		
 		return tulem;
 	}
-	/*
+	
 	public boolean saabTehaT2isRuumi() { // see meetod peaks kontrollima, kas antud osalejatega saab ruumi
-		// if 9+ in
-		 * if 8 in - peab olema 1 IM tiim ja 1 kohtunik
-		 * if 7 in - peab olema 2 IM tiimi ja 1 kohtunik
-		 * 
+		
+		if (this.tagastaKoguLiikmeteArv() >= 9) {
+			return true;
+		} else if (this.tagastaKoguLiikmeteArv() == 8 && kohtunikud.size() < 2
+				&& this.tagastaIMTiimideArv() < 2) {
+			return true;
+		} else if (this.tagastaKoguLiikmeteArv() == 7 && kohtunikud.size() < 2
+				&& this.tagastaIMTiimideArv() < 3) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean saabTehaPoolikuRuumi() {
-		// if 6 in
-		 * if 5 in
-		 * if 4 in
-	}*/
+		
+		if (this.tagastaKoguLiikmeteArv() == 6 && kohtunikud.size() < 3
+				&& this.tagastaIMTiimideArv() == 0 && tiimid.size() < 3) {
+			return true;
+		} else if (this.tagastaKoguLiikmeteArv() == 5 && kohtunikud.size() < 2
+				&& this.tagastaIMTiimideArv() < 2 && tiimid.size() < 3) {
+			return true;
+		} else if (this.tagastaKoguLiikmeteArv() == 4 && kohtunikud.size() < 2
+				&& this.tagastaIMTiimideArv() < 2 && tiimid.size() < 3) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 }
