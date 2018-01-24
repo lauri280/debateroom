@@ -280,15 +280,18 @@ public class Randomiseerija {
 		 return null;
 	 }
 	 
-	 public Ruum moodustaEelistustegaRuum(OsalejateKogum osalejad) {
+	 public Ruum moodustaEelistustegaT2isRuum(OsalejateKogum osalejad) {
 		 Ruum ruum = new Ruum();
 		 ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
 		 ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
 		 ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
 		 
+		 if (osalejad.saabTehaT2isRuumi()) {
+			 
+		 }
 		 // kui tiime < 4 ja inimesi piisvalt siis loon tiimid
 		 // kui loon full tiimid ja kohtunikuks ei ole kedagi, siis IM tiimid
-		 // kui siis ka ei saa kohtunikuks kedagi, siis error 
+		 // kui siis ka ei saa kohtunikuks kedagi, siis error
 		 
 		 Collections.shuffle(tiimideKogum);
 		 while (this.onIronManTiim(tiimideKogum.get(0))) {
