@@ -20,8 +20,6 @@ public class TestMain {
 //		osalejad.lisaOsaleja(new Osaleja("jj", false));
 		
 		System.out.println(osalejad.getClass().getName());
-		
-
 	}
 
 }
