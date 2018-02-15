@@ -291,7 +291,8 @@ public class Main extends Application {
 			public void handle(MouseEvent me) {
 				if (osalejad.getOsalejad().size() > 3) {
 					// Tekita uus ruum randomiseerijaga ja siis selle sisu ekraanile
-					Ruum uusRuum = randomiseerija.moodustaRuum(osalejad.getOsalejad());
+					//Ruum uusRuum = randomiseerija.moodustaRuum(osalejad.getOsalejad());
+					Ruum uusRuum = randomiseerija.moodustaEelistustegaT2isRuum(osalejad);
 					System.out.println(uusRuum.toString()); // testimiseks
 					
 					lbOG1.setText(uusRuum.getTiimOG().get(0).getNimi());

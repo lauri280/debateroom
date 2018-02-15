@@ -158,7 +158,6 @@ public class Randomiseerija {
 		 if (ajutineOsalejad.size() == 8) { // siia peab panema selle, et kontrolliks, kas on kogenuid osalejaid
 			 tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
 		 } else if (ajutineOsalejad.size() == 7) {
-			 System.out.println("kala");
 			 tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
 			 tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
 		 }
@@ -287,11 +286,34 @@ public class Randomiseerija {
 		 ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
 		 
 		 if (osalejad.saabTehaT2isRuumi()) {
-			 
+			if (osalejad.tagastaKoguLiikmeteArv() == 7) {
+				while (osalejad.tagastaIMTiimideArv() < 2) {
+					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));					
+				}
+			} else if (osalejad.tagastaKoguLiikmeteArv() == 8) {
+				while (osalejad.tagastaIMTiimideArv() < 1) {
+					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+				}
+			}
 		 }
-		 // kui tiime < 4 ja inimesi piisvalt siis loon tiimid
-		 // kui loon full tiimid ja kohtunikuks ei ole kedagi, siis IM tiimid
-		 // kui siis ka ei saa kohtunikuks kedagi, siis error
+		 
+		 while (MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 0 &&
+				 MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0 &&
+				 tiimideKogum.size() < 4) {
+			 tiimideKogum.add(this.valiAlgKogOsaleja(ajutineOsalejad));
+		 }
+		 
+		 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 1 &&
+				 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) == 0 &&
+				 tiimideKogum.size() < 4) {
+			 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+		 }
+		 
+		 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) == 0 &&
+				 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 1 &&
+				 tiimideKogum.size() < 4) {
+			 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+		 }
 		 
 		 Collections.shuffle(tiimideKogum);
 		 while (this.onIronManTiim(tiimideKogum.get(0))) {
