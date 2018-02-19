@@ -15,11 +15,14 @@ public class TestMain {
 		osalejad.lisaOsaleja(new Osaleja("ee", false));
 		osalejad.lisaOsaleja(new Osaleja("ff", false));
 		osalejad.lisaOsaleja(new Osaleja("gg", false));
-//		osalejad.lisaOsaleja(new Osaleja("hh", false));
-//		osalejad.lisaOsaleja(new Osaleja("ii", false));
-//		osalejad.lisaOsaleja(new Osaleja("jj", false));
+		osalejad.lisaOsaleja(new Osaleja("hh", false));
+		osalejad.lisaOsaleja(new Osaleja("ii", false));
+		osalejad.lisaOsaleja(new Osaleja("jj", false));
 		
-		System.out.println(osalejad.getClass().getName());
+		System.out.println(osalejad.saabTehaT2isRuumi());
+		
+		Ruum uusRuum = randomiseerija.moodustaEelistustegaT2isRuum(osalejad);
+		System.out.println(uusRuum.toString());
 	}
 
 }

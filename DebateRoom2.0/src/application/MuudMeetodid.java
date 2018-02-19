@@ -42,4 +42,40 @@ public class MuudMeetodid {
 		
 		return false;
 	}
+	
+	public static Ruum looTyhiRuum() { // teeb tühja ruumi for testing purposes
+		Ruum ruum = new Ruum();
+		
+		ruum.setTiimOG(tagastaTyhiTiim());
+		ruum.setTiimOO(tagastaTyhiTiim());
+		ruum.setTiimCG(tagastaTyhiTiim());
+		ruum.setTiimCO(tagastaTyhiTiim());
+		ruum.setKohtunikud(tagastaTyhiTiim());
+		
+		return ruum;
+	}
+	
+	private static Osaleja tagastaTyhiOsaleja() { // ainult tagastaTyhiTiim() jaoks
+		return new Osaleja("-", true);
+	}
+	 
+	private static ArrayList<Osaleja> tagastaTyhiTiim() { // ainult looTyhiRuum() jaoks
+		ArrayList<Osaleja> tulem = new ArrayList<>();
+		
+		tulem.add(tagastaTyhiOsaleja());
+		tulem.add(tagastaTyhiOsaleja());
+		
+		return tulem;
+	}
+	
+	public static int tagastaIMTiimideArv(ArrayList<ArrayList<Osaleja>> tiimid) {
+		int tulem = 0;
+		for (ArrayList<Osaleja> elem : tiimid) {
+			if (MuudMeetodid.onIronmanTiim(elem)) {
+				tulem++;
+			}
+		}
+		
+		return tulem;
+	}
 }

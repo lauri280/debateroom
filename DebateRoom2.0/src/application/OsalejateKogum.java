@@ -323,4 +323,12 @@ public class OsalejateKogum {
 		return false;
 	}
 	
+	public boolean onEelistusi() {
+		if (!(tiimid.isEmpty()) && !(kohtunikud.isEmpty())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }
