@@ -294,7 +294,8 @@ public class OsalejateKogum {
 	
 	public boolean saabTehaT2isRuumi() { // see meetod peaks kontrollima, kas antud osalejatega saab ruumi
 		
-		if (this.tagastaKoguLiikmeteArv() >= 9) {
+		if (this.tagastaKoguLiikmeteArv() >= 9 
+				&& kohtunikud.size() <= (this.tagastaKoguLiikmeteArv() - 8)) {
 			return true;
 		} else if (this.tagastaKoguLiikmeteArv() == 8 && kohtunikud.size() < 2
 				&& this.tagastaIMTiimideArv() < 2) {
@@ -303,7 +304,6 @@ public class OsalejateKogum {
 				&& this.tagastaIMTiimideArv() < 3) {
 			return true;
 		}
-		
 		return false;
 	}
 	
@@ -313,13 +313,12 @@ public class OsalejateKogum {
 				&& this.tagastaIMTiimideArv() == 0 && tiimid.size() < 3) {
 			return true;
 		} else if (this.tagastaKoguLiikmeteArv() == 5 && kohtunikud.size() < 2
-				&& this.tagastaIMTiimideArv() < 2 && tiimid.size() < 3) {
+				&& this.tagastaIMTiimideArv() == 0 && tiimid.size() < 3) {
 			return true;
 		} else if (this.tagastaKoguLiikmeteArv() == 4 && kohtunikud.size() < 2
 				&& this.tagastaIMTiimideArv() < 2 && tiimid.size() < 3) {
 			return true;
 		}
-		
 		return false;
 	}
 	

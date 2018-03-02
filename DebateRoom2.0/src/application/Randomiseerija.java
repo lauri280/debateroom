@@ -292,13 +292,13 @@ public class Randomiseerija {
 		 } 
 	 }
 	 
-	 public Ruum moodustaEelistustegaT2isRuum(OsalejateKogum osalejad) {
-		 Ruum ruum = new Ruum();
-		 ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
-		 ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
-		 ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
-		 
-		 if (osalejad.saabTehaT2isRuumi()) {
+	public Ruum moodustaEelistustegaT2isRuum(OsalejateKogum osalejad) {
+		Ruum ruum = new Ruum();
+		ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
+		ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
+		ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
+		
+		if (osalejad.saabTehaT2isRuumi()) {
 			if (osalejad.tagastaKoguLiikmeteArv() == 7) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 2) {
 					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));					
@@ -308,102 +308,102 @@ public class Randomiseerija {
 					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
 				}
 			}
-		 
-			 while (MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 0 &&
-					 MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0 &&
-					 tiimideKogum.size() < 4) {
-				 tiimideKogum.add(this.valiAlgKogOsaleja(ajutineOsalejad));
-			 }
+
+			while (MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 0 &&
+					MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0 &&
+					tiimideKogum.size() < 4) {
+				tiimideKogum.add(this.valiAlgKogOsaleja(ajutineOsalejad));
+			}
+
+			while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 1 &&
+					MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) == 0 &&
+					tiimideKogum.size() < 4) {
+				tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+			}
 			 
-			 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 1 &&
-					 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) == 0 &&
-					 tiimideKogum.size() < 4) {
-				 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
-			 }
+			while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) == 0 &&
+					MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 1 &&
+					tiimideKogum.size() < 4) {
+				tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+			}
 			 
-			 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) == 0 &&
-					 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 1 &&
-					 tiimideKogum.size() < 4) {
-				 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
-			 }
+			Collections.shuffle(tiimideKogum);
+			while (this.onIronManTiim(tiimideKogum.get(0))) {
+				Collections.shuffle(tiimideKogum);
+			}
+
+			ruum.setTiimOG(tiimideKogum.get(0));
+			ruum.setTiimOO(tiimideKogum.get(1));
+			ruum.setTiimCG(tiimideKogum.get(2));
+			ruum.setTiimCO(tiimideKogum.get(3));
 			 
-			 Collections.shuffle(tiimideKogum);
-			 while (this.onIronManTiim(tiimideKogum.get(0))) {
-				 Collections.shuffle(tiimideKogum);
-			 }
+			for (Osaleja elem : ajutineOsalejad) {
+				ruum.lisaKohLiige(elem);
+			}
+
+			for (Osaleja elem : ajutineKohtunikud) {
+				ruum.lisaKohLiige(elem);
+			}
+
+			return ruum;
+		}
 			 
-			 ruum.setTiimOG(tiimideKogum.get(0));
-			 ruum.setTiimOO(tiimideKogum.get(1));
-			 ruum.setTiimCG(tiimideKogum.get(2));
-			 ruum.setTiimCO(tiimideKogum.get(3));
-			 
-			 for (Osaleja elem : ajutineOsalejad) {
-				 ruum.lisaKohLiige(elem);
-			 }
-			 
-			 for (Osaleja elem : ajutineKohtunikud) {
-				 ruum.lisaKohLiige(elem);
-			 }
-			 
-			 return ruum;
-		 }
-			 
-		 return MuudMeetodid.looTyhiRuum();
-	 }
+		return MuudMeetodid.looTyhiRuum();
+	}
 	 
-	 public Ruum moodustaEelistustegaPoolikRuum(OsalejateKogum osalejad) {
-		 Ruum ruum = new Ruum();
-		 ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
-		 ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
-		 ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
-		 
-		 if (osalejad.saabTehaPoolikuRuumi()) {
-			 if (osalejad.tagastaKoguLiikmeteArv() == 4) {
-				 while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 1) {
-						tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
-					}
-			 }
-			 
-			 while (MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 0 &&
-					 MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0 &&
-					 tiimideKogum.size() < 2) {
-				 tiimideKogum.add(this.valiAlgKogOsaleja(ajutineOsalejad));
-			 }
-			 
-			 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 1 &&
-					 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) == 0 &&
-					 tiimideKogum.size() < 2) {
-				 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
-			 }
-			 
-			 while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) == 0 &&
-					 MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 1 &&
-					 tiimideKogum.size() < 2) {
-				 tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
-			 } 
-			 
-			 Collections.shuffle(tiimideKogum);
-			 while (this.onIronManTiim(tiimideKogum.get(0))) {
-				 Collections.shuffle(tiimideKogum);
-			 }
-			 
-			 ruum.setTiimOG(tiimideKogum.get(0));
-			 ruum.setTiimOO(tiimideKogum.get(1));
-			 ruum.setTiimCG(this.tagastaTyhiTiim());
-			 ruum.setTiimCO(this.tagastaTyhiTiim());
-			 
-			 for (Osaleja elem : ajutineOsalejad) {
-				 ruum.lisaKohLiige(elem);
-			 }
-			 
-			 for (Osaleja elem : ajutineKohtunikud) {
-				 ruum.lisaKohLiige(elem);
-			 }
-			 
-			 return ruum;
-		 }
-		 
-		 return MuudMeetodid.looTyhiRuum();
-	 }
-	 
+	public Ruum moodustaEelistustegaPoolikRuum(OsalejateKogum osalejad) {
+		Ruum ruum = new Ruum();
+		ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
+		ArrayList<Osaleja> ajutineKohtunikud = osalejad.getKohtunikudCopy();
+		ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
+		
+		if (osalejad.saabTehaPoolikuRuumi()) {
+			if (osalejad.tagastaKoguLiikmeteArv() == 4) {
+				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 1) {
+					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+				}
+			}
+			
+			while (MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 0 &&
+					MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0 &&
+					tiimideKogum.size() < 2) {
+				tiimideKogum.add(this.valiAlgKogOsaleja(ajutineOsalejad));
+			}
+			
+			while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 1 &&
+					MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) == 0 &&
+					tiimideKogum.size() < 2) {
+				tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+			}
+			
+			while (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) == 0 &&
+					MuudMeetodid.tagastaAlgajateArv(ajutineOsalejad) > 1 &&
+					tiimideKogum.size() < 2) {
+				tiimideKogum.add(this.valiKaksRndOsalejat(ajutineOsalejad));
+			} 
+			
+			Collections.shuffle(tiimideKogum);
+			while (this.onIronManTiim(tiimideKogum.get(0))) {
+				Collections.shuffle(tiimideKogum);
+			}
+			
+			ruum.setTiimOG(tiimideKogum.get(0));
+			ruum.setTiimOO(tiimideKogum.get(1));
+			ruum.setTiimCG(this.tagastaTyhiTiim());
+			ruum.setTiimCO(this.tagastaTyhiTiim());
+			
+			for (Osaleja elem : ajutineOsalejad) {
+				ruum.lisaKohLiige(elem);
+			}
+			
+			for (Osaleja elem : ajutineKohtunikud) {
+				ruum.lisaKohLiige(elem);
+			}
+			
+			return ruum;
+		}
+		
+		return MuudMeetodid.looTyhiRuum();
+	}
+	
 }

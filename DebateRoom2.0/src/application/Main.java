@@ -289,7 +289,7 @@ public class Main extends Application {
 		buttonPositsioonid.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
-				if (osalejad.getOsalejad().size() > 3) {
+				if (osalejad.tagastaKoguLiikmeteArv() > 3) {
 					// Tekita uus ruum randomiseerijaga ja siis selle sisu ekraanile
 					//Ruum uusRuum = randomiseerija.moodustaRuum(osalejad.getOsalejad());
 					Ruum uusRuum = randomiseerija.moodustaRuum(osalejad);
