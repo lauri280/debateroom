@@ -5,10 +5,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
@@ -31,11 +33,33 @@ public class Main extends Application {
 		OsalejateKogum osalejad = new OsalejateKogum();
 		Randomiseerija randomiseerija = new Randomiseerija();
 		
-		// --- Ajutised GUI asjad, mis peavad eespool olema ---
+		// --- GUI asjad, mis peavad eespool olema ---
 		ListView<String> osalejateList = new ListView<>();
 		root.add(osalejateList, 2, 1);
 		GridPane.setRowSpan(osalejateList, 15);
+		
+		// magic, mille abil saab hiirega valida mitu cell'i
 		osalejateList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		osalejateList.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> {
+			Node node = evt.getPickResult().getIntersectedNode();
+			if (node instanceof ListCell) {
+				evt.consume();
+				ListCell cell = (ListCell)node;
+				ListView lv = cell.getListView();
+				
+				lv.requestFocus();
+				
+				if (!cell.isEmpty()) {
+					int i = cell.getIndex();
+					if (cell.isSelected()) {
+						lv.getSelectionModel().clearSelection(i);
+					} else {
+						lv.getSelectionModel().select(i);
+					}
+				}
+			}
+			
+		});
 		
 		ListView<String> tiimideList = new ListView<>();
 		root.add(tiimideList, 4, 1);
@@ -91,9 +115,9 @@ public class Main extends Application {
 				}
 			}
 		});
-		
+		/*
 		Button buttonTest = new Button("Testnupp"); // nupp testimiseks
-		root.add(buttonTest, 0, 4);
+		root.add(buttonTest, 0, 5);
 		
 		buttonTest.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -101,9 +125,9 @@ public class Main extends Application {
 				System.out.println(osalejad.tagastaKoguLiikmeteArv());
 			}
 		});
-		
+		*/
 		Button buttonSeaded = new Button("Seaded");
-		root.add(buttonSeaded, 0, 5);
+		root.add(buttonSeaded, 0, 4);
 		
 		Separator eraldaja1 = new Separator(); // eraldab 1. ja 2. GUI bloki
 		eraldaja1.setOrientation(Orientation.VERTICAL);
@@ -291,9 +315,7 @@ public class Main extends Application {
 			public void handle(MouseEvent me) {
 				if (osalejad.tagastaKoguLiikmeteArv() > 3) {
 					// Tekita uus ruum randomiseerijaga ja siis selle sisu ekraanile
-					//Ruum uusRuum = randomiseerija.moodustaRuum(osalejad.getOsalejad());
 					Ruum uusRuum = randomiseerija.moodustaRuum(osalejad);
-					//Ruum uusRuum = randomiseerija.moodustaEelistustegaT2isRuum(osalejad);
 					System.out.println(uusRuum.toString()); // testimiseks
 					
 					lbOG1.setText(uusRuum.getTiimOG().get(0).getNimi());
