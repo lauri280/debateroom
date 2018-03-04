@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -44,8 +45,8 @@ public class Main extends Application {
 			Node node = evt.getPickResult().getIntersectedNode();
 			if (node instanceof ListCell) {
 				evt.consume();
-				ListCell cell = (ListCell)node;
-				ListView lv = cell.getListView();
+				ListCell<?> cell = (ListCell<?>)node;
+				ListView<?> lv = cell.getListView();
 				
 				lv.requestFocus();
 				
@@ -132,7 +133,7 @@ public class Main extends Application {
 		Separator eraldaja1 = new Separator(); // eraldab 1. ja 2. GUI bloki
 		eraldaja1.setOrientation(Orientation.VERTICAL);
 		root.add(eraldaja1, 1, 0);
-		GridPane.setRowSpan(eraldaja1, 45);
+		GridPane.setRowSpan(eraldaja1, 22);
 		
 		
 		// --- Osalejate list (GUI 2. blokk) ---
@@ -193,7 +194,7 @@ public class Main extends Application {
 		Separator eraldaja2 = new Separator(); // eraldab 2. ja 3./4. GUI bloki
 		eraldaja2.setOrientation(Orientation.VERTICAL);
 		root.add(eraldaja2, 3, 0);
-		GridPane.setRowSpan(eraldaja2, 45);
+		GridPane.setRowSpan(eraldaja2, 22);
 		
 		
 		// --- Tiimid/kohtunikud (GUI 3. blokk) ---
@@ -340,6 +341,10 @@ public class Main extends Application {
 		Scene scene = new Scene(root, 980, 660);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("DebateRoom v1.0");
+		primaryStage.getIcons().add(new Image("/icons/DRicon16x16.png"));
+		primaryStage.getIcons().add(new Image("/icons/DRicon32x32.png"));
+		primaryStage.getIcons().add(new Image("/icons/DRicon48x48.png"));
+		primaryStage.getIcons().add(new Image("/icons/DRicon256x256.png"));
 		primaryStage.show();
 		
 	}
