@@ -39,9 +39,20 @@ public class Main extends Application {
 		root.add(osalejateList, 2, 1);
 		GridPane.setRowSpan(osalejateList, 15);
 		
+		ListView<String> tiimideList = new ListView<>();
+		root.add(tiimideList, 4, 1);
+		GridPane.setRowSpan(tiimideList, 10);
+		
+		ListView<String> kohtunikeList = new ListView<>();
+		root.add(kohtunikeList, 5, 1);
+		GridPane.setRowSpan(kohtunikeList, 10);
+		
 		// magic, mille abil saab hiirega valida mitu cell'i
 		osalejateList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		osalejateList.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> {
+			tiimideList.getSelectionModel().clearSelection();
+			kohtunikeList.getSelectionModel().clearSelection();
+			
 			Node node = evt.getPickResult().getIntersectedNode();
 			if (node instanceof ListCell) {
 				evt.consume();
@@ -59,17 +70,18 @@ public class Main extends Application {
 					}
 				}
 			}
-			
 		});
 		
-		ListView<String> tiimideList = new ListView<>();
-		root.add(tiimideList, 4, 1);
-		GridPane.setRowSpan(tiimideList, 10);
+		// järgmised kaks blokki selleks, et saaks selekteerida vaid ühe ListView cell'e
+		tiimideList.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> {
+			osalejateList.getSelectionModel().clearSelection();
+			kohtunikeList.getSelectionModel().clearSelection();
+		});
 		
-		ListView<String> kohtunikeList = new ListView<>();
-		root.add(kohtunikeList, 5, 1);
-		GridPane.setRowSpan(kohtunikeList, 10);
-
+		kohtunikeList.addEventFilter(MouseEvent.MOUSE_PRESSED, evt -> {
+			osalejateList.getSelectionModel().clearSelection();
+			tiimideList.getSelectionModel().clearSelection();
+		});
 		
 		// --- Osaleja sisestamine (GUI 1. blokk) ---
 		Label labelSisesta = new Label();
@@ -116,17 +128,17 @@ public class Main extends Application {
 				}
 			}
 		});
-		/*
+		
 		Button buttonTest = new Button("Testnupp"); // nupp testimiseks
 		root.add(buttonTest, 0, 5);
 		
 		buttonTest.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
-				System.out.println(osalejad.tagastaKoguLiikmeteArv());
+				osalejateList.getSelectionModel().clearSelection();
 			}
 		});
-		*/
+		
 		Button buttonSeaded = new Button("Seaded");
 		root.add(buttonSeaded, 0, 4);
 		

@@ -50,13 +50,21 @@ public class MuudMeetodid {
 		ruum.setTiimOO(tagastaTyhiTiim());
 		ruum.setTiimCG(tagastaTyhiTiim());
 		ruum.setTiimCO(tagastaTyhiTiim());
-		ruum.setKohtunikud(tagastaTyhiTiim());
+		ruum.setKohtunikud(tagastaTyhiOsalejaArray());
 		
 		return ruum;
 	}
 	
 	private static Osaleja tagastaTyhiOsaleja() { // ainult tagastaTyhiTiim() jaoks
 		return new Osaleja("-", true);
+	}
+	
+	private static ArrayList<Osaleja> tagastaTyhiOsalejaArray() {
+		ArrayList<Osaleja> tulem = new ArrayList<Osaleja>();
+		
+		tulem.add(MuudMeetodid.tagastaTyhiOsaleja());
+		
+		return tulem;
 	}
 	 
 	private static ArrayList<Osaleja> tagastaTyhiTiim() { // ainult looTyhiRuum() jaoks
