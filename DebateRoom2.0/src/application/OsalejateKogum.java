@@ -132,6 +132,13 @@ public class OsalejateKogum {
 		}
 	}
 	
+	public void eemaldaOsalejad(ObservableList<String> liikmed) {
+		for (String elem : liikmed) {
+			Osaleja osaleja = this.tagastaNimegaOsaleja(elem);
+			osalejad.remove(osaleja);
+		}
+	}
+	
 	public void eemaldaOsaleja(String nimi) {
 		for (Osaleja elem : osalejad) {
 			if (elem.getNimi().equals(nimi)) {

@@ -160,9 +160,15 @@ public class Main extends Application {
 		buttonEemalda.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
-				if (!(osalejateList.getSelectionModel().getSelectedItem() == null)) {
+				// esimene osa eemaldab ühe osaleja korraga, jätan igaks juhuks alles selle osa hetkel
+/*				if (!(osalejateList.getSelectionModel().getSelectedItem() == null)) {
 					osalejad.eemaldaOsaleja(osalejad.tagastaNimegaOsaleja
 							(osalejateList.getSelectionModel().getSelectedItem()));
+					osalejateList.setItems(osalejad.tagastaObservList());
+				}
+*/
+				if (osalejateList.getSelectionModel().getSelectedItems().size() > 0) {
+					osalejad.eemaldaOsalejad(osalejateList.getSelectionModel().getSelectedItems());
 					osalejateList.setItems(osalejad.tagastaObservList());
 				}
 			}

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Randomiseerija {
 
-	 public Ruum moodustaRndRuum(ArrayList<Osaleja> osalejad) { // 9+ in ruum 100% suvalt
+/*	 public Ruum moodustaRndRuum(ArrayList<Osaleja> osalejad) { // 9+ in ruum 100% suvalt
 		 Ruum ruum = new Ruum();
 		 
 		 ArrayList<Osaleja> ajutineOsalejad = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Randomiseerija {
 		 
 		 return ruum;
 	 }
-	 
+*/ 
 	 public Osaleja valiRndOsaleja(ArrayList<Osaleja> osalejad) {
 		 int randomInt = ((int)(Math.random() * (osalejad.size())));
 		 Osaleja tulem = osalejad.get(randomInt);
@@ -301,11 +301,19 @@ public class Randomiseerija {
 		if (osalejad.saabTehaT2isRuumi()) {
 			if (osalejad.tagastaKoguLiikmeteArv() == 7) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 2) {
-					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));					
+					if (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
+						tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+					} else {
+						tiimideKogum.add(this.valiAlgajaIronMan(ajutineOsalejad));
+					}
 				}
 			} else if (osalejad.tagastaKoguLiikmeteArv() == 8) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 1) {
-					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+					if (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
+						tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+					} else {
+						tiimideKogum.add(this.valiAlgajaIronMan(ajutineOsalejad));
+					}
 				}
 			}
 
@@ -360,7 +368,11 @@ public class Randomiseerija {
 		if (osalejad.saabTehaPoolikuRuumi()) {
 			if (osalejad.tagastaKoguLiikmeteArv() == 4) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 1) {
-					tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+					if (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
+						tiimideKogum.add(this.valiKogenudIronMan(ajutineOsalejad));
+					} else {
+						tiimideKogum.add(this.valiAlgajaIronMan(ajutineOsalejad));
+					}
 				}
 			}
 			
