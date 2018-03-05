@@ -97,6 +97,7 @@ public class Main extends Application {
 		
 		Button buttonLisa = new Button("Lisa");
 		root.add(buttonLisa, 0, 3);
+		buttonLisa.setPrefWidth(150);
 		buttonLisa.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
@@ -128,7 +129,7 @@ public class Main extends Application {
 				}
 			}
 		});
-		
+/*		
 		Button buttonTest = new Button("Testnupp"); // nupp testimiseks
 		root.add(buttonTest, 0, 5);
 		
@@ -138,10 +139,10 @@ public class Main extends Application {
 				osalejateList.getSelectionModel().clearSelection();
 			}
 		});
-		
+	
 		Button buttonSeaded = new Button("Seaded");
 		root.add(buttonSeaded, 0, 4);
-		
+*/		
 		Separator eraldaja1 = new Separator(); // eraldab 1. ja 2. GUI bloki
 		eraldaja1.setOrientation(Orientation.VERTICAL);
 		root.add(eraldaja1, 1, 0);
@@ -364,7 +365,7 @@ public class Main extends Application {
 		
 		
 		// --- Stseeni tekitamine ---
-		Scene scene = new Scene(root, 980, 660);
+		Scene scene = new Scene(root, 980, 680);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("DebateRoom v1.0");
 		primaryStage.getIcons().add(new Image("/icons/DRicon16x16.png"));
