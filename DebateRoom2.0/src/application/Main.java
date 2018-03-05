@@ -372,6 +372,7 @@ public class Main extends Application {
 		primaryStage.getIcons().add(new Image("/icons/DRicon32x32.png"));
 		primaryStage.getIcons().add(new Image("/icons/DRicon48x48.png"));
 		primaryStage.getIcons().add(new Image("/icons/DRicon256x256.png"));
+		primaryStage.setResizable(true);
 		primaryStage.show();
 		
 	}
