@@ -21,6 +21,14 @@ public class OsalejateKogum {
 		osalejad.remove(kohtunik);
 	}
 	
+	public void lisaKohtunikud(ObservableList<String> liikmed) {
+		for (String elem : liikmed) {
+			Osaleja osaleja = this.tagastaNimegaOsaleja(elem);
+			kohtunikud.add(osaleja);
+			osalejad.remove(osaleja);
+		}
+	}
+	
 	public void lisaTiim(Osaleja liigeA, Osaleja liigeB) { // kaheliikmelise tiimi lisamiseks
 		if (tiimid.size() < 4) {
 			ArrayList<Osaleja> lisatavadOsalejad = new ArrayList<>();

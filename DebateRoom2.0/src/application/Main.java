@@ -189,9 +189,16 @@ public class Main extends Application {
 		buttonLisaKohtunik.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
-				if (!(osalejateList.getSelectionModel().getSelectedItem() == null)) {
+				// see esimene variant töötab vaid ühe osalejaga korraga, igaks juhuks praegu jätan alles
+/*				if (!(osalejateList.getSelectionModel().getSelectedItem() == null)) {
 					osalejad.lisaKohtunik(osalejad.tagastaNimegaOsaleja
 							(osalejateList.getSelectionModel().getSelectedItem()));
+					osalejateList.setItems(osalejad.tagastaObservList());
+					kohtunikeList.setItems(osalejad.tagastaObservKohtunikeList());
+				}
+*/				
+				if (osalejateList.getSelectionModel().getSelectedItems().size() > 0) {
+					osalejad.lisaKohtunikud(osalejateList.getSelectionModel().getSelectedItems());
 					osalejateList.setItems(osalejad.tagastaObservList());
 					kohtunikeList.setItems(osalejad.tagastaObservKohtunikeList());
 				}
@@ -210,6 +217,7 @@ public class Main extends Application {
 		
 		
 		// --- Tiimid/kohtunikud (GUI 3. blokk) ---
+		// ListView elemendid eespool
 		Label labelTiimid = new Label("Tiimid:");
 		root.add(labelTiimid, 4, 0);
 		
