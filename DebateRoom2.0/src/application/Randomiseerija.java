@@ -292,6 +292,7 @@ public class Randomiseerija {
 		 } 
 	 }
 	 
+	// Ruumide moodustajad, mis on actually kasutuses
 	public Ruum moodustaEelistustegaT2isRuum(OsalejateKogum osalejad) {
 		Ruum ruum = new Ruum();
 		ArrayList<Osaleja> ajutineOsalejad = osalejad.getOsalejadCopy();
@@ -299,6 +300,11 @@ public class Randomiseerija {
 		ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
 		
 		if (osalejad.saabTehaT2isRuumi()) {
+			if (ajutineKohtunikud.size() == 0 && 
+					MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
+				ruum.lisaKohLiige(this.valiRndKogenudOsaleja(ajutineOsalejad));
+			}
+			
 			if (osalejad.tagastaKoguLiikmeteArv() == 7) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 2) {
 					if (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
@@ -366,6 +372,11 @@ public class Randomiseerija {
 		ArrayList<ArrayList<Osaleja>> tiimideKogum = osalejad.getTiimidCopy();
 		
 		if (osalejad.saabTehaPoolikuRuumi()) {
+			if (ajutineKohtunikud.size() == 0 && 
+					MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
+				ruum.lisaKohLiige(this.valiRndKogenudOsaleja(ajutineOsalejad));
+			}
+			
 			if (osalejad.tagastaKoguLiikmeteArv() == 4) {
 				while (MuudMeetodid.tagastaIMTiimideArv(tiimideKogum) < 1) {
 					if (MuudMeetodid.tagastaKogenuteArv(ajutineOsalejad) > 0) {
