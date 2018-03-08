@@ -9,9 +9,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
@@ -70,6 +73,43 @@ public class Main extends Application {
 					}
 				}
 			}
+		});
+		
+		// osalejateList'i context menu
+		osalejateList.setCellFactory(lv -> { 
+			ListCell<String> cell = new ListCell<>();
+			ContextMenu contextMenu = new ContextMenu();
+			
+			// Nupud
+			CheckMenuItem miAlgaja = new CheckMenuItem();
+			miAlgaja.setText("Algaja");
+			
+			CheckMenuItem miKohKohus = new CheckMenuItem();
+			miKohKohus.setText("Kohtunikukohus");
+			
+			MenuItem miEemalda = new MenuItem();
+			miEemalda.setText("Eemalda");
+			miEemalda.setOnAction(evt -> {
+				osalejad.eemaldaOsaleja(cell.getItem());
+				osalejateList.setItems(osalejad.tagastaObservList());
+				
+			});
+			
+			contextMenu.getItems().addAll(miAlgaja, miKohKohus, miEemalda);
+			
+			// vajalik, et listis oleks kuvatud nimed
+			cell.textProperty().bind(cell.itemProperty()); 
+			
+			// lisab contextMenu vaid siis, kui cell pole tyhi
+			cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
+                if (isNowEmpty) {
+                    cell.setContextMenu(null);
+                } else {
+                    cell.setContextMenu(contextMenu);
+                }
+            });
+			
+			return cell;
 		});
 		
 		// järgmised kaks blokki selleks, et saaks selekteerida vaid ühe ListView cell'e
@@ -367,7 +407,7 @@ public class Main extends Application {
 		// --- Stseeni tekitamine ---
 		Scene scene = new Scene(root, 980, 680);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("DebateRoom v1.0");
+		primaryStage.setTitle("DebateRoom v1.0.01");
 		primaryStage.getIcons().add(new Image("/icons/DRicon16x16.png"));
 		primaryStage.getIcons().add(new Image("/icons/DRicon32x32.png"));
 		primaryStage.getIcons().add(new Image("/icons/DRicon48x48.png"));

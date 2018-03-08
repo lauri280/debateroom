@@ -4,8 +4,17 @@ public class Osaleja {
 	
 	private String nimi;
 	private boolean onAlgaja;
+	private boolean peaksOlemaKohtunik;
 
 	// --- get/set/con ---
+	public boolean isPeaksOlemaKohtunik() {
+		return peaksOlemaKohtunik;
+	}
+
+	public void setPeaksOlemaKohtunik(boolean peaksOlemaKohtunik) {
+		this.peaksOlemaKohtunik = peaksOlemaKohtunik;
+	}
+
 	public boolean isOnAlgaja() {
 		return onAlgaja;
 	}
@@ -29,6 +38,14 @@ public class Osaleja {
 	}
 	
 	// --- Muud meetodid ---
+	public void muudaStaatus() {
+		if (onAlgaja == true) {
+			this.onAlgaja = false;
+		} else {
+			this.onAlgaja = true;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		if (onAlgaja == true) {
